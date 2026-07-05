@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 const passport = require('./config/passport');
 const authRoutes = require('./routes/authRoutes');
 const interviewRoutes = require('./routes/interviewRoutes');
+const path = require('path');
 
 // Connect to MongoDB when the server starts.
 connectDB();
@@ -19,6 +20,7 @@ app.use(
   })
 );
 app.use(express.json());
+
 // Session support used by Passport for OAuth login flows.
 app.use(
   session({
@@ -38,6 +40,15 @@ app.get('/api/health', (_req, res) => {
 // Route groups for authentication and interview features.
 app.use('/api/auth', authRoutes);
 app.use('/api/interviews', interviewRoutes);
+
+// ✅ Serve frontend build in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
