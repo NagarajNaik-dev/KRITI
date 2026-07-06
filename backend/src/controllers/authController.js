@@ -3,6 +3,13 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 
+const normalizeEmail = (email = '') => email.trim().toLowerCase();
+
+const normalizeAvatar = (avatar = '') => {
+  if (!avatar || typeof avatar !== 'string') return '';
+  return avatar.startsWith('//') ? `https:${avatar}` : avatar;
+};
+
 // Create a signed JWT for a given user ID.
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -16,7 +23,7 @@ const sendTokenResponse = (user, res) => {
       id: user._id,
       name: user.name,
       email: user.email,
-      avatar: user.avatar,
+      avatar: normalizeAvatar(user.avatar),
     },
   });
 };
@@ -39,8 +46,9 @@ const getTransporter = () => {
 exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    const normalizedEmail = normalizeEmail(email);
 
-    if (!name || !email || !password) {
+    if (!name || !normalizedEmail || !password) {
       return res.status(400).json({ message: 'Please provide all fields' });
     }
 
@@ -48,12 +56,12 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: 'Password must be at least 6 characters' });
     }
 
-    const existing = await User.findOne({ email });
+    const existing = await User.findOne({ email: normalizedEmail });
     if (existing) {
       return res.status(400).json({ message: 'Email already registered' });
     }
 
-    const user = await User.create({ name, email, password });
+    const user = await User.create({ name, email: normalizedEmail, password });
     sendTokenResponse(user, res);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -64,12 +72,13 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const normalizedEmail = normalizeEmail(email);
 
-    if (!email || !password) {
+    if (!normalizedEmail || !password) {
       return res.status(400).json({ message: 'Please provide email and password' });
     }
 
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email: normalizedEmail }).select('+password');
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -82,12 +91,16 @@ exports.login = async (req, res) => {
 
 // Return the currently authenticated user's profile.
 exports.getMe = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: 'Not authorized' });
+  }
+
   res.json({
     user: {
       id: req.user._id,
       name: req.user.name,
       email: req.user.email,
-      avatar: req.user.avatar,
+      avatar: normalizeAvatar(req.user.avatar),
     },
   });
 };
@@ -96,7 +109,8 @@ exports.getMe = async (req, res) => {
 exports.forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await User.findOne({ email });
+    const normalizedEmail = normalizeEmail(email);
+    const user = await User.findOne({ email: normalizedEmail });
 
     if (!user) {
       return res.json({ message: 'If that email exists, a reset link has been sent' });
@@ -165,5 +179,6 @@ exports.resetPassword = async (req, res) => {
 // OAuth callback: issue a token and redirect back to the frontend.
 exports.googleCallback = (req, res) => {
   const token = signToken(req.user._id);
-  res.redirect(`${process.env.CLIENT_URL}/auth/callback?token=${token}`);
+  const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+  res.redirect(`${clientUrl}/auth/callback?token=${token}`);
 };

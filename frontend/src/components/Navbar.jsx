@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from './ThemeToggle';
+import UserAvatar from './UserAvatar';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -44,9 +45,7 @@ export default function Navbar() {
                 Profile
               </Link>
               <div className="flex items-center gap-2">
-                {user.avatar && (
-                  <img src={user.avatar} alt="" className="w-8 h-8 rounded-full" />
-                )}
+                <UserAvatar key={user.avatar || user.id} user={user} />
                 <button onClick={handleLogout} className="text-sm text-red-500 hover:text-red-600">
                   Logout
                 </button>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import UserAvatar from '../components/UserAvatar';
 import api, { formatRole } from '../utils/api';
 
 // Profile page shows the logged-in user's details, interview statistics,
@@ -19,13 +20,7 @@ export default function Profile() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="card p-6 mb-8 flex items-center gap-4">
-        {user?.avatar ? (
-          <img src={user.avatar} alt="" className="w-16 h-16 rounded-full" />
-        ) : (
-          <div className="w-16 h-16 rounded-full bg-primary-600 flex items-center justify-center text-white text-2xl font-bold">
-            {user?.name?.[0]?.toUpperCase()}
-          </div>
-        )}
+        <UserAvatar key={user?.avatar || user?.id} user={user} className="w-16 h-16" textClassName="text-2xl" />
         <div>
           <h1 className="text-2xl font-bold">{user?.name}</h1>
           <p className="text-gray-600 dark:text-gray-400">{user?.email}</p>

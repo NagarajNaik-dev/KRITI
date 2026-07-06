@@ -16,7 +16,10 @@ router.put('/reset-password/:token', resetPassword);
 // Google OAuth login endpoint.
 router.get(
   '/google',
-  passport.authenticate('google', { scope: ['profile', 'email'], session: false })
+  passport.authenticate('google', {
+    scope: ['profile', 'email', 'https://www.googleapis.com/auth/userinfo.profile'],
+    session: false,
+  })
 );
 
 // Google OAuth callback returns the user token to the frontend.
