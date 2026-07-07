@@ -51,12 +51,14 @@ passport.use(
         let user = await User.findOne({ googleId: profile.id });
 
         if (user) {
+          user.emailVerified = true;
           if (photoUrl) user.avatar = photoUrl;
           await user.save();
         } else {
           user = await User.findOne({ email });
           if (user) {
             user.googleId = profile.id;
+            user.emailVerified = true;
             if (photoUrl) user.avatar = photoUrl;
             await user.save();
           } else {
@@ -65,6 +67,7 @@ passport.use(
               name: profile.displayName || email.split('@')[0],
               email,
               avatar: photoUrl,
+              emailVerified: true,
             });
           }
         }

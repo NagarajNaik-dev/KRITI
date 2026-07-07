@@ -1,6 +1,15 @@
 const express = require('express');
 const passport = require('../config/passport');
-const { register, login, getMe, forgotPassword, resetPassword, googleCallback } = require('../controllers/authController');
+const {
+  register,
+  login,
+  getMe,
+  forgotPassword,
+  resetPassword,
+  verifyEmail,
+  resendVerification,
+  googleCallback,
+} = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
 
 // Public and protected authentication routes.
@@ -9,6 +18,8 @@ const router = express.Router();
 
 router.post('/register', register);
 router.post('/login', login);
+router.get('/verify-email/:token', verifyEmail);
+router.post('/resend-verification', resendVerification);
 router.get('/me', protect, getMe);
 router.post('/forgot-password', forgotPassword);
 router.put('/reset-password/:token', resetPassword);

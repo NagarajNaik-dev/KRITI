@@ -12,6 +12,8 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [pendingVerification, setPendingVerification] = useState(false);
+  const [verifyUrl, setVerifyUrl] = useState('');
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -19,8 +21,17 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setVerifyUrl('');
     try {
-      await register(name, email, password);
+      const data = await register(name, email, password);
+      if (data?.requiresVerification) {
+        setPendingVerification(true);
+        if (data.verifyUrl) {
+          setVerifyUrl(data.verifyUrl);
+        }
+        toast.success('Check your email to verify your account');
+        return;
+      }
       toast.success('Account created!');
       navigate('/');
     } catch (err) {
@@ -29,6 +40,31 @@ export default function Register() {
       setLoading(false);
     }
   };
+
+  if (pendingVerification) {
+    return (
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4">
+        <div className="card w-full max-w-md p-8 text-center">
+          <h2 className="text-2xl font-bold mb-4">Verify your email</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            We sent a verification link to <strong>{email}</strong>. You must verify your email before you can sign in.
+          </p>
+          {verifyUrl && (
+            <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 break-words">
+              Dev mode link:
+              <br />
+              <a href={verifyUrl} className="text-primary-600 hover:underline break-words">
+                {verifyUrl}
+              </a>
+            </p>
+          )}
+          <Link to="/login" className="text-primary-600 hover:underline">
+            Go to login
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4">

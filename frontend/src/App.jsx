@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import AuthCallback from './pages/AuthCallback';
+import VerifyEmail from './pages/VerifyEmail';
 import InterviewSetup from './pages/InterviewSetup';
 import InterviewRoom from './pages/InterviewRoom';
 import InterviewReview from './pages/InterviewReview';
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route path="/verify-email/:token" element={<VerifyEmail />} />
         <Route
           path="/interview"
           element={

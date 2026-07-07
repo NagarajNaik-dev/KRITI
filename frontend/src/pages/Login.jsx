@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
+import api from '../utils/api';
 
 // Base URL for the app backend, used for external auth redirects.
 const API_BASE = import.meta.env.VITE_API_URL?.replace(/\/api$/, '') || window.location.origin;
@@ -11,18 +12,39 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [needsVerification, setNeedsVerification] = useState(false);
+  const [resending, setResending] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  const handleResendVerification = async () => {
+    setResending(true);
+    try {
+      const { data } = await api.post('/auth/resend-verification', { email });
+      toast.success(data.message || 'Verification email sent');
+      if (data.verifyUrl) {
+        toast.success('Dev mode: check server console or use the link shown in register flow');
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Could not resend verification email');
+    } finally {
+      setResending(false);
+    }
+  };
 
   // Handle login form submission and show toast feedback.
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setNeedsVerification(false);
     try {
       await login(email, password);
       toast.success('Welcome back!');
       navigate('/');
     } catch (err) {
+      if (err.response?.status === 403 && err.response?.data?.requiresVerification) {
+        setNeedsVerification(true);
+      }
       toast.error(err.response?.data?.message || 'Login failed');
     } finally {
       setLoading(false);
@@ -97,6 +119,16 @@ export default function Login() {
           <button type="submit" disabled={loading} className="btn-primary w-full">
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
+          {needsVerification && (
+            <button
+              type="button"
+              onClick={handleResendVerification}
+              disabled={resending}
+              className="w-full text-sm text-primary-600 hover:underline"
+            >
+              {resending ? 'Sending...' : 'Resend verification email'}
+            </button>
+          )}
         </form>
 
         <p className="text-center text-sm mt-6 text-gray-600 dark:text-gray-400">
