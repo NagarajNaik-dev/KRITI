@@ -10,6 +10,7 @@ export default function AuthCallback() {
 
   // Handle the redirect back from Google OAuth and exchange the token to sign in.
   useEffect(() => {
+    alert('AuthCallback mounted, token = ' + searchParams.get('token'));
     const token = searchParams.get('token');
     if (token) {
       loginWithToken(token)
