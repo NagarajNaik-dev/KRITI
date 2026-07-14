@@ -1,5 +1,7 @@
 # KRITI – AI Interview Preparation Platform
 
+**Live Demo:** [https://kriti-egzt.onrender.com](https://kriti-egzt.onrender.com)
+
 **Kriti** is an AI‑powered interview preparation platform built with the **MERN stack**. It enables job seekers to practice technical and aptitude interviews through role‑based mock sessions, real‑time AI‑generated questions, instant feedback, and detailed performance reviews.
 
 ---
@@ -129,7 +131,7 @@ SMTP_PASS=your_email_password
 
 ---
 
-## ▶️ Running the Application
+## ▶️ Running the Application (Local)
 
 Start the backend server:  
 ```bash
@@ -142,6 +144,17 @@ Start the frontend development server:
 cd frontend
 npm run dev
 ```
+
+---
+
+## 🌐 Deployment
+
+Kriti is deployed on **Render** for production hosting.  
+
+- **Frontend & Backend**: Hosted on Render with automatic builds from the GitHub repository  
+- **Database**: MongoDB Atlas for cloud persistence  
+- **Environment Variables**: Configured securely in Render dashboard  
+- **Live Demo**: [https://kriti-egzt.onrender.com](https://kriti-egzt.onrender.com)  
 
 ---
 
