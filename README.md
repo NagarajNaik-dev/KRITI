@@ -145,7 +145,7 @@ npm run dev
 
 ---
 
-## 📖 Usage
+## � Usage
 
 1. Register or log in to your account  
 2. Select role, experience level, and interview type  
