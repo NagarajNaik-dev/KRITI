@@ -12,42 +12,42 @@ Kriti provides a realistic, guided environment for candidates to sharpen their i
 
 Key capabilities include:
 
-- Secure authentication with JWT and Google OAuth  
-- Password reset flows via email  
-- Role‑based interview sessions (e.g., Software Developer, Data Scientist, Cloud Engineer)  
-- AI‑generated questions tailored to role and experience level  
-- Automated answer evaluation with scoring and constructive feedback  
-- Interview history tracking with performance insights  
+- Secure authentication with JWT and Google OAuth
+- Password reset flows via email
+- Role‑based interview sessions (e.g., Software Developer, Data Scientist, Cloud Engineer)
+- AI‑generated questions tailored to role and experience level
+- Automated answer evaluation with scoring and constructive feedback
+- Interview history tracking with performance insights
 
 ---
 
 ## 🚀 Features
 
-- **Role‑based interview setup**: Choose from multiple positions and experience levels  
-- **Technical & aptitude modes**: Practice both coding and problem‑solving interviews  
-- **Personalized question generation**: Adaptive to user profile and skill level  
-- **AI feedback engine**: Ratings, suggestions, and improvement guidance for each answer  
-- **Comprehensive review page**: Overall assessment, ideal answers, and growth insights  
-- **Secure user experience**: Protected routes and authenticated sessions  
+- **Role‑based interview setup**: Choose from multiple positions and experience levels
+- **Technical & aptitude modes**: Practice both coding and problem‑solving interviews
+- **Personalized question generation**: Adaptive to user profile and skill level
+- **AI feedback engine**: Ratings, suggestions, and improvement guidance for each answer
+- **Comprehensive review page**: Overall assessment, ideal answers, and growth insights
+- **Secure user experience**: Protected routes and authenticated sessions
 
 ---
 
 ## 🛠 Tech Stack
 
-**Frontend**  
-- React.js (with Vite)  
-- React Router  
-- Tailwind CSS  
-- Axios  
-- React Hot Toast  
+**Frontend**
+- React.js (with Vite)
+- React Router
+- Tailwind CSS
+- Axios
+- React Hot Toast
 
-**Backend**  
-- Node.js & Express.js  
-- MongoDB with Mongoose  
-- JWT Authentication  
-- Passport.js (Google OAuth)  
-- Nodemailer (password reset emails)  
-- Groq SDK (AI‑powered interview generation & evaluation)  
+**Backend**
+- Node.js & Express.js
+- MongoDB with Mongoose
+- JWT Authentication
+- Passport.js (Google OAuth)
+- Nodemailer (password reset emails)
+- Groq SDK (AI‑powered interview generation & evaluation)
 
 ---
 
@@ -77,11 +77,11 @@ KRITI/
 
 ## ⚙️ Prerequisites
 
-- Node.js 18+  
-- npm 10+  
-- MongoDB (local instance or Atlas)  
-- Groq API key  
-- Google OAuth credentials (optional, for social login)  
+- Node.js 18+
+- npm 10+
+- MongoDB (local instance or Atlas)
+- Groq API key
+- Google OAuth credentials (optional, for social login)
 
 ---
 
@@ -111,19 +111,19 @@ SMTP_PASS=your_email_password
 
 ## 🖥 Installation
 
-1. Clone the repository  
+1. Clone the repository
    ```bash
    git clone <your-repo-url>
    cd KRITI
    ```
 
-2. Install backend dependencies  
+2. Install backend dependencies
    ```bash
    cd backend
    npm install
    ```
 
-3. Install frontend dependencies  
+3. Install frontend dependencies
    ```bash
    cd ../frontend
    npm install
@@ -133,13 +133,13 @@ SMTP_PASS=your_email_password
 
 ## ▶️ Running the Application (Local)
 
-Start the backend server:  
+Start the backend server:
 ```bash
 cd backend
 npm run dev
 ```
 
-Start the frontend development server:  
+Start the frontend development server:
 ```bash
 cd frontend
 npm run dev
@@ -147,28 +147,24 @@ npm run dev
 
 ---
 
-<<<<<<< HEAD
-## � Usage
-=======
 ## 🌐 Deployment
 
-Kriti is deployed on **Render** for production hosting.  
+Kriti is deployed on **Render** for production hosting.
 
-- **Frontend & Backend**: Hosted on Render with automatic builds from the GitHub repository  
-- **Database**: MongoDB Atlas for cloud persistence  
-- **Environment Variables**: Configured securely in Render dashboard  
-- **Live Demo**: [https://kriti-egzt.onrender.com](https://kriti-egzt.onrender.com)  
+- **Frontend & Backend**: Hosted on Render with automatic builds from the GitHub repository
+- **Database**: MongoDB Atlas for cloud persistence
+- **Environment Variables**: Configured securely in the Render dashboard
+- **Live Demo**: [https://kriti-egzt.onrender.com](https://kriti-egzt.onrender.com)
 
 ---
 
 ## 📖 Usage
->>>>>>> 12a7cc11f12f160e92ff59a5aa313d8f6ec731ae
 
-1. Register or log in to your account  
-2. Select role, experience level, and interview type  
-3. Begin a mock interview session  
-4. Answer AI‑generated questions  
-5. Receive instant feedback and review performance  
+1. Register or log in to your account
+2. Select role, experience level, and interview type
+3. Begin a mock interview session
+4. Answer AI‑generated questions
+5. Receive instant feedback and review performance
 
 ---
 
@@ -176,20 +172,20 @@ Kriti is deployed on **Render** for production hosting.
 
 Authentication & interview routes under `/api`:
 
-- `POST /api/auth/register`  
-- `POST /api/auth/login`  
-- `POST /api/auth/forgot-password`  
-- `POST /api/auth/reset-password/:token`  
-- `POST /api/interviews/start`  
-- `POST /api/interviews/:id/answer`  
-- `GET /api/interviews/:id/review`  
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/auth/forgot-password`
+- `POST /api/auth/reset-password/:token`
+- `POST /api/interviews/start`
+- `POST /api/interviews/:id/answer`
+- `GET /api/interviews/:id/review`
 
 ---
 
 ## 🧑‍💻 Author
 
-Created by **Nagaraj Lakshman Naik**  
-Passionate about building practical projects that combine software engineering and AI.  
-Focused on creating scalable systems, intelligent applications, and professional documentation that showcase both technical and creative strengths.  
+Created by **Nagaraj Lakshman Naik**
+Passionate about building practical projects that combine software engineering and AI.
+Focused on creating scalable systems, intelligent applications, and professional documentation that showcase both technical and creative strengths.
 
 ---
