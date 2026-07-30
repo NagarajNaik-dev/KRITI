@@ -38,19 +38,13 @@ export default function Home() {
       {/* Hero: text on the left, a mock interview preview on the right instead of empty space */}
       <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center mb-24">
         <div>
-          {/* eyebrow — small mono label, not centered, sits slightly off the heading's left edge on purpose */}
-          <div className="flex items-center gap-2 mb-4 ml-0.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-500 animate-pulse" />
-            <span className="text-[11px] font-mono uppercase tracking-[0.14em] text-gray-400">
-              kriti · interview session
-            </span>
-          </div>
-
           <h1 className="text-4xl md:text-[3.25rem] leading-[1.08] font-bold tracking-tight mb-5">
             {getGreeting(user?.name)}
           </h1>
           <p className="text-lg font-normal text-gray-600 dark:text-gray-400 max-w-lg mb-8">
-            No more guessing how you did. Pick a role, answer like it's real, and see exactly where you lost points — before the actual interview does.
+            Think of Kriti as your practice partner. Pick a role, answer real
+            interview questions, and see your score the second you&apos;re
+            done.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -82,9 +76,11 @@ export default function Home() {
               hover:rotate-0 hover:-translate-y-0.5"
           >
             <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-200 dark:border-gray-800">
-              <div className="w-7 h-7 rounded-full bg-primary-600 flex items-center justify-center text-white text-xs font-bold">
-                AI
-              </div>
+              <img
+                src="/kritiLogo.png"
+                alt="Kriti"
+                className="w-7 h-7 rounded-full object-cover ring-1 ring-primary-500/40"
+              />
               <span className="text-sm font-semibold">Kriti Interviewer</span>
               <span className="ml-auto text-xs font-mono text-gray-400">Q2 / 5</span>
             </div>
