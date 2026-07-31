@@ -42,9 +42,7 @@ export default function Home() {
             {getGreeting(user?.name)}
           </h1>
           <p className="text-lg font-normal text-gray-600 dark:text-gray-400 max-w-lg mb-8">
-            Think of Kriti as your practice partner. Pick a role, answer real
-            interview questions, and see your score the second you&apos;re
-            done.
+            No more guessing how you did. Pick a role, answer like it's real, and see exactly where you lost points — before the actual interview does.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -77,7 +75,7 @@ export default function Home() {
           >
             <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-200 dark:border-gray-800">
               <img
-                src="/kritiLogo.png"
+                src="/kriti.jpeg"
                 alt="Kriti"
                 className="w-7 h-7 rounded-full object-cover ring-1 ring-primary-500/40"
               />
