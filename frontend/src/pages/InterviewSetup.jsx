@@ -55,7 +55,7 @@ export default function InterviewSetup() {
     <div className="max-w-2xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-2">Start Interview</h1>
       <p className="text-gray-600 dark:text-gray-400 mb-8">
-        Configure your session and Kritiwill adapt questions to your role and experience level.
+        Configure your session and Kriti will adapt questions to your role and experience level.
       </p>
 
       <div className="card p-6 space-y-6">
@@ -116,7 +116,7 @@ export default function InterviewSetup() {
                 onClick={() => setType(t.id)}
                 className={`flex-1 p-4 rounded-lg border text-left transition ${
                   type === t.id
-                    ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20'
+                    ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300'
                     : 'border-gray-200 dark:border-gray-700 hover:border-primary-400'
                 }`}
               >
