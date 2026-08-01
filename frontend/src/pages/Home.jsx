@@ -75,7 +75,7 @@ export default function Home() {
           >
             <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-200 dark:border-gray-800">
               <img
-                src="/kritiLogo.png"
+                src="/kriti.jpeg"
                 alt="Kriti"
                 className="w-7 h-7 rounded-full object-cover ring-1 ring-primary-500/40"
               />
