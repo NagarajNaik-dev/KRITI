@@ -42,7 +42,7 @@ export default function Home() {
             {getGreeting(user?.name)}
           </h1>
           <p className="text-lg font-normal text-gray-600 dark:text-gray-400 max-w-lg mb-8">
-            No more guessing how you did. Pick a role, answer like it's real, and see exactly where you lost points — before the actual interview does.
+            No more guessing how you did. Pick a role, answer like it's real, and see exactly where you lost points - before the actual interview does.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
