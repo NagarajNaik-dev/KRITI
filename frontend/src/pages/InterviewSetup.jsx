@@ -55,7 +55,7 @@ export default function InterviewSetup() {
     <div className="max-w-2xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-2">Start Interview</h1>
       <p className="text-gray-600 dark:text-gray-400 mb-8">
-        Configure your session and the AI interviewer will adapt questions to your role and experience level.
+        Configure your session and Kritiwill adapt questions to your role and experience level.
       </p>
 
       <div className="card p-6 space-y-6">
