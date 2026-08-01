@@ -32,6 +32,20 @@ Key capabilities include:
 
 ---
 
+## 🖼 Screenshots
+
+<!-- Replace the paths below with your actual image files, e.g. docs/screenshots/home.png -->
+
+| Home | Interview Session |
+|---|---|
+| ![Home page](docs/screenshots/home.png) | ![Interview session](docs/screenshots/interview.png) |
+
+| Feedback & Review | Profile |
+|---|---|
+| ![Feedback and review](docs/screenshots/review.png) | ![Profile page](docs/screenshots/profile.png) |
+
+---
+
 ## 🛠 Tech Stack
 
 **Frontend**

@@ -65,7 +65,7 @@ export default function Home() {
         </div>
 
         {/* Mock interview preview card — a concrete visual instead of a generic hero graphic */}
-        <div className="relative hidden lg:block">
+        <div className="relative">
           <div className="absolute -inset-4 rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 -rotate-2" />
           <div
             className="relative card p-5 rotate-1
@@ -75,7 +75,7 @@ export default function Home() {
           >
             <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-200 dark:border-gray-800">
               <img
-                src="/kriti.jpeg"
+                src="/kritiLogo.png"
                 alt="Kriti"
                 className="w-7 h-7 rounded-full object-cover ring-1 ring-primary-500/40"
               />
