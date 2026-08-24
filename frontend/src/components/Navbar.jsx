@@ -52,14 +52,9 @@ export default function Navbar() {
               </div>
             </>
           ) : (
-            <>
-              <Link to="/login" className="text-sm hover:text-primary-600">
-                Login
-              </Link>
-              <Link to="/register" className="btn-primary text-sm">
-                Sign Up
-              </Link>
-            </>
+            <Link to="/login" className="btn-primary text-sm">
+              Sign In
+            </Link>
           )}
         </div>
       </div>

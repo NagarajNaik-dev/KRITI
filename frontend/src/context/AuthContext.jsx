@@ -75,29 +75,6 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  // Log in with email and password, store token locally, and keep user info in state.
-  const login = async (email, password) => {
-    const { data } = await api.post('/auth/login', { email, password });
-    if (data?.token) {
-      localStorage.setItem('token', data.token);
-      setUser(normalizeUser(data.user));
-    }
-    return data;
-  };
-
-  // Register a new user, receive an auth token, and set the user state.
-  const register = async (name, email, password) => {
-    const { data } = await api.post('/auth/register', { name, email, password });
-    if (data?.requiresVerification) {
-      return data;
-    }
-    if (data?.token) {
-      localStorage.setItem('token', data.token);
-      setUser(normalizeUser(data.user));
-    }
-    return data;
-  };
-
   // Use an existing token to restore user authentication state.
   const loginWithToken = (token) => {
     localStorage.setItem('token', token);
@@ -114,7 +91,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, loginWithToken, logout }}>
+    <AuthContext.Provider value={{ user, loading, loginWithToken, logout }}>
       {children}
     </AuthContext.Provider>
   );

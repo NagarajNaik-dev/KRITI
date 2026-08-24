@@ -12,8 +12,7 @@ Kriti provides a realistic, guided environment for candidates to sharpen their i
 
 Key capabilities include:
 
-- Secure authentication with JWT and Google OAuth
-- Password reset flows via email
+- Fast and secure one-click Google OAuth authentication
 - Role‑based interview sessions (e.g., Software Developer, Data Scientist, Cloud Engineer)
 - AI‑generated questions tailored to role and experience level
 - Automated answer evaluation with scoring and constructive feedback
@@ -60,8 +59,7 @@ Key capabilities include:
 - MongoDB with Mongoose
 - JWT Authentication
 - Passport.js (Google OAuth)
-- Nodemailer (password reset emails)
-- Groq SDK (AI‑powered interview generation & evaluation)
+- @google/generative-ai (Google Gemini AI SDK for interview generation & evaluation)
 
 ---
 
@@ -94,8 +92,8 @@ KRITI/
 - Node.js 18+
 - npm 10+
 - MongoDB (local instance or Atlas)
-- Groq API key
-- Google OAuth credentials (optional, for social login)
+- Google Gemini API key (from Google AI Studio)
+- Google OAuth credentials (Google Cloud Console)
 
 ---
 
@@ -109,16 +107,12 @@ NODE_ENV=development
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 CLIENT_URL=your_frontend_url
-GROQ_API_KEY=your_groq_api_key
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_MODEL=gemini-3.6-flash
 
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 GOOGLE_CALLBACK_URL=your_backend_url/api/auth/google/callback
-
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your_email@gmail.com
-SMTP_PASS=your_email_password
 ```
 
 ---

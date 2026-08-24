@@ -6,10 +6,8 @@ const connectDB = require('./config/db');
 const passport = require('./config/passport');
 const authRoutes = require('./routes/authRoutes');
 const interviewRoutes = require('./routes/interviewRoutes');
+const { validateGroqModels } = require('./services/aiService');
 const path = require('path');
-
-// Connect to MongoDB when the server starts.
-connectDB();
 
 const app = express();
 
@@ -51,4 +49,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+const startServer = async () => {
+  // Validate both models on every boot, before accepting interview requests.
+  await validateGroqModels();
+  await connectDB();
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+};
+
+startServer().catch((error) => {
+  console.error('Server startup failed:', error.message);
+  process.exitCode = 1;
+});

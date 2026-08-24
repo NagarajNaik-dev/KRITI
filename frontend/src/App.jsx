@@ -4,11 +4,7 @@ import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Register from './pages/Register';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
 import AuthCallback from './pages/AuthCallback';
-import VerifyEmail from './pages/VerifyEmail';
 import InterviewSetup from './pages/InterviewSetup';
 import InterviewRoom from './pages/InterviewRoom';
 import InterviewReview from './pages/InterviewReview';
@@ -28,11 +24,11 @@ export default function App() {
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
-        <Route path="/verify-email/:token" element={<VerifyEmail />} />
+        <Route path="/register" element={<Navigate to="/login" replace />} />
+        <Route path="/forgot-password" element={<Navigate to="/login" replace />} />
+        <Route path="/reset-password/:token" element={<Navigate to="/login" replace />} />
+        <Route path="/verify-email/:token" element={<Navigate to="/login" replace />} />
         <Route
           path="/interview"
           element={

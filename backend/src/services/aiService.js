@@ -1,5 +1,9 @@
 const Groq = require('groq-sdk');
 
+const PRIMARY_MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
+const FALLBACK_MODEL = 'openai/gpt-oss-20b';
+const MODEL_CHAIN = [...new Set([PRIMARY_MODEL, FALLBACK_MODEL])];
+
 // Mapping of internal role IDs to display labels used by the AI prompts.
 const ROLES = {
   software_developer: 'Software Developer (SDE)',
@@ -43,19 +47,50 @@ const parseJSON = (text) => {
   }
 };
 
-// Send a chat prompt to the Groq AI model and return the raw response text.
+// Confirm the configured primary and fallback models are available from Groq.
+// `models.list()` calls https://api.groq.com/openai/v1/models.
+const validateGroqModels = async () => {
+  const groq = getGroq();
+  const models = await groq.models.list();
+  const availableModelIds = new Set((models.data || []).map((model) => model.id));
+  const unavailableModels = MODEL_CHAIN.filter((model) => !availableModelIds.has(model));
+
+  if (unavailableModels.length) {
+    throw new Error(
+      `Configured Groq model(s) are unavailable: ${unavailableModels.join(', ')}. ` +
+      `Available models were checked at https://api.groq.com/openai/v1/models.`
+    );
+  }
+
+  console.log(`Validated Groq models: ${MODEL_CHAIN.join(', ')}`);
+};
+
+// Send a chat prompt to Groq and return the raw response text.
 const chat = async (systemPrompt, userPrompt) => {
   const groq = getGroq();
-  const completion = await groq.chat.completions.create({
-    model: 'llama-3.3-70b-versatile',
-    messages: [
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: userPrompt },
-    ],
-    temperature: 0.7,
-    max_tokens: 1024,
-  });
-  return completion.choices[0]?.message?.content || '';
+  let lastError;
+
+  for (const model of MODEL_CHAIN) {
+    try {
+      const completion = await groq.chat.completions.create({
+        model,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+        temperature: 0.7,
+        max_tokens: 1024,
+      });
+      return completion.choices[0]?.message?.content || '';
+    } catch (error) {
+      lastError = error;
+      if (model !== FALLBACK_MODEL) {
+        console.warn(`Groq model ${model} failed; trying ${FALLBACK_MODEL}.`);
+      }
+    }
+  }
+
+  throw lastError;
 };
 
 // Return a level-specific instruction for the AI depending on candidate experience.
@@ -145,6 +180,7 @@ Return ONLY valid JSON with this shape: {"idealAnswer": "comprehensive answer wi
 
 module.exports = {
   ROLES,
+  validateGroqModels,
   generateQuestion,
   evaluateAnswer,
   generateOverallFeedback,

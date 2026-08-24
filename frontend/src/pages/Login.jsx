@@ -1,66 +1,33 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { useAuth } from '../context/AuthContext';
-import api from '../utils/api';
-
 // Base URL for the app backend, used for external auth redirects.
 const API_BASE = import.meta.env.VITE_API_URL?.replace(/\/api$/, '') || window.location.origin;
 
-// Login page allows the user to authenticate with email/password or Google.
+// Login page allows the user to authenticate via Google OAuth.
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [needsVerification, setNeedsVerification] = useState(false);
-  const [resending, setResending] = useState(false);
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const handleResendVerification = async () => {
-    setResending(true);
-    try {
-      const { data } = await api.post('/auth/resend-verification', { email });
-      toast.success(data.message || 'Verification email sent');
-      if (data.verifyUrl) {
-        toast.success('Dev mode: check server console or use the link shown in register flow');
-      }
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Could not resend verification email');
-    } finally {
-      setResending(false);
-    }
-  };
-
-  // Handle login form submission and show toast feedback.
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setNeedsVerification(false);
-    try {
-      await login(email, password);
-      toast.success('Welcome back!');
-      navigate('/');
-    } catch (err) {
-      if (err.response?.status === 403 && err.response?.data?.requiresVerification) {
-        setNeedsVerification(true);
-      }
-      toast.error(err.response?.data?.message || 'Login failed');
-    } finally {
-      setLoading(false);
-    }
+  const handleGoogleLogin = () => {
+    window.location.href = `${API_BASE}/api/auth/google`;
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4">
-      <div className="card w-full max-w-md p-8">
-        <h2 className="text-2xl font-bold text-center mb-6">Welcome back</h2>
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12">
+      <div className="card w-full max-w-md p-8 text-center shadow-xl border border-gray-100 dark:border-gray-800">
+        <div className="flex justify-center mb-4">
+          <img
+            src="/kritiLogo.png"
+            alt="Kriti Logo"
+            className="w-16 h-16 rounded-full object-cover shadow-md border border-gray-200 dark:border-gray-700"
+          />
+        </div>
+
+        <h2 className="text-2xl font-bold mb-2">Welcome to Kriti</h2>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">
+          Sign in to practice mock interviews, receive real-time AI evaluations, and track your progress.
+        </p>
 
         <button
-          onClick={() => (window.location.href = `${API_BASE}/api/auth/google`)}
-          className="w-full flex items-center justify-center gap-3 border border-gray-300 dark:border-gray-700 rounded-lg py-2.5 mb-6 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+          onClick={handleGoogleLogin}
+          className="w-full flex items-center justify-center gap-3 border border-gray-300 dark:border-gray-700 rounded-xl py-3.5 px-4 font-medium text-sm hover:bg-gray-50 dark:hover:bg-gray-800/80 shadow-sm transition-all duration-200 hover:shadow"
         >
-          <svg className="w-5 h-5" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
             <path
               fill="#4285F4"
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -81,61 +48,8 @@ export default function Login() {
           Continue with Google
         </button>
 
-        <div className="relative mb-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300 dark:border-gray-700" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white dark:bg-gray-900 text-gray-500">or</span>
-          </div>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm mb-1">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="input-field"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm mb-1">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input-field"
-              required
-            />
-          </div>
-          <div className="text-right">
-            <Link to="/forgot-password" className="text-sm text-primary-600 hover:underline">
-              Forgot password?
-            </Link>
-          </div>
-          <button type="submit" disabled={loading} className="btn-primary w-full">
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
-          {needsVerification && (
-            <button
-              type="button"
-              onClick={handleResendVerification}
-              disabled={resending}
-              className="w-full text-sm text-primary-600 hover:underline"
-            >
-              {resending ? 'Sending...' : 'Resend verification email'}
-            </button>
-          )}
-        </form>
-
-        <p className="text-center text-sm mt-6 text-gray-600 dark:text-gray-400">
-          Don&apos;t have an account?{' '}
-          <Link to="/register" className="text-primary-600 hover:underline">
-            Sign up
-          </Link>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-6">
+          Fast & secure one-click sign in. No password required.
         </p>
       </div>
     </div>
