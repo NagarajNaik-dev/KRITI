@@ -102,11 +102,13 @@ export default function InterviewRoom() {
 
       <div className="card p-6 mb-6">
         <div className="flex items-start gap-3">
-          <div className="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold shrink-0">
-            AI
-          </div>
+          <img
+            src="/kriti.jpeg"
+            alt="KRITI"
+            className="w-10 h-10 rounded-full object-cover shrink-0 ring-1 ring-primary-500/40"
+          />
           <div>
-            <p className="text-sm text-gray-500 mb-1">Interviewer</p>
+            <p className="text-sm text-gray-500 mb-1">KRITI</p>
             <p className="text-lg">{question || 'Loading question...'}</p>
           </div>
         </div>
