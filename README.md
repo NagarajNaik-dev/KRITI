@@ -33,15 +33,13 @@ Key capabilities include:
 
 ## 🖼 Screenshots
 
-<!-- Replace the paths below with your actual image files, e.g. docs/screenshots/home.png -->
-
 | Home | Interview Session |
 |---|---|
-| ![Home page](docs/screenshots/home.png) | ![Interview session](docs/screenshots/interview.png) |
+| ![Home page](frontend/public/homepage.jpeg) | ![Interview session](frontend/public/interviewpage.jpeg) |
 
 | Feedback & Review | Profile |
 |---|---|
-| ![Feedback and review](docs/screenshots/review.png) | ![Profile page](docs/screenshots/profile.png) |
+| ![Feedback and review](frontend/public/ideal_ans.jpeg) | ![Profile page](frontend/public/profilepage.jpeg) |
 
 ---
 
