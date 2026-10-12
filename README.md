@@ -16,9 +16,13 @@
 
 ## 📌 Overview
 
+> 🌐 **Live Demo:** [**https://kriti-egzt.onrender.com**](https://kriti-egzt.onrender.com)  
+> *Experience the platform live — practice role-tailored technical and aptitude mock interviews with real-time AI evaluation.*
+
 **Kriti** is an intelligent, full-stack mock interview platform built on the **MERN stack** and powered by **Groq AI**. It offers candidates an authentic, low-pressure simulation environment to hone their technical problem-solving, behavioral communication, and aptitude skills.
 
 ### Key Highlights
+- **Live Deployment**: Try the application instantly at [**kriti-egzt.onrender.com**](https://kriti-egzt.onrender.com).
 - **Seamless One-Click Login**: Fast Google OAuth authentication via Passport.js.
 - **Custom Role Mock Interviews**: Tailored sessions for Software Engineers, Data Scientists, Cloud Architects, and more.
 - **Dynamic Question Generation**: Context-aware prompts generated on the fly based on selected role and seniority.
