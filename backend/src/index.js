@@ -41,7 +41,13 @@ app.use('/api/interviews', interviewRoutes);
 
 // ✅ Serve frontend build in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+  const distPath = path.join(__dirname, '../../frontend/dist');
+  const publicPath = path.join(__dirname, '../../frontend/public');
+  app.use(express.static(distPath));
+  app.use(express.static(publicPath));
+
+  // Ensure missing icons or manifest never return index.html from SPA catch-all
+  app.get(/^\/(?:favicon\.ico|favicon-.*\.png|apple-touch-icon\.png|icon-.*\.png|site\.webmanifest)$/, (_req, res) => res.status(404).end());
 
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
