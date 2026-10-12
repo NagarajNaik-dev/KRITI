@@ -19,10 +19,11 @@
 > 🌐 **Live Demo:** [**https://kriti-egzt.onrender.com**](https://kriti-egzt.onrender.com)  
 > *Experience the platform live — practice role-tailored technical and aptitude mock interviews with real-time AI evaluation.*
 
-**Kriti** is an intelligent, full-stack mock interview platform built on the **MERN stack** and powered by **Groq AI**. It offers candidates an authentic, low-pressure simulation environment to hone their technical problem-solving, behavioral communication, and aptitude skills.
+**Kriti** is an intelligent, full-stack mock interview platform built on the **MERN stack** and powered by modern AI model APIs—delivering lightning-fast interview interactions using **GPT models (such as `openai/gpt-oss-120b` with fallback to `openai/gpt-oss-20b`) through Groq's high-speed inference engine**. It offers candidates an authentic, low-pressure simulation environment to hone their technical problem-solving, behavioral communication, and aptitude skills.
 
 ### Key Highlights
 - **Live Deployment**: Try the application instantly at [**kriti-egzt.onrender.com**](https://kriti-egzt.onrender.com).
+- **Fast AI Model APIs via Groq**: Utilizes state-of-the-art models like GPT (`openai/gpt-oss-120b` / `20b`) hosted on Groq for sub-second question generation and critique latency.
 - **Seamless One-Click Login**: Fast Google OAuth authentication via Passport.js.
 - **Custom Role Mock Interviews**: Tailored sessions for Software Engineers, Data Scientists, Cloud Architects, and more.
 - **Dynamic Question Generation**: Context-aware prompts generated on the fly based on selected role and seniority.
@@ -77,7 +78,7 @@ Kriti includes a standard Web App Manifest and adaptive maskable icon suite:
 - **Runtime**: Node.js & Express.js
 - **Database**: MongoDB with Mongoose
 - **Authentication**: Passport.js (Google OAuth 2.0), JWT
-- **AI Engine**: Groq SDK (`groq-sdk`)
+- **AI Engine**: Groq SDK (`groq-sdk`) running high-performance models including GPT (`openai/gpt-oss-120b` with `openai/gpt-oss-20b` fallback)
 
 ---
 
