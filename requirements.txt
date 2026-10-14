@@ -7,6 +7,7 @@ npm>=10
 
 # Frontend dependencies (frontend/package.json)
 axios@^1.7.7
+lucide-react@^1.28.0
 react@^18.3.1
 react-dom@^18.3.1
 react-router-dom@^6.26.2
@@ -18,11 +19,11 @@ postcss@^8.4.47
 autoprefixer@^10.4.20
 
 # Backend dependencies (backend/package.json)
-@google/generative-ai@^0.24.0
 cors@^2.8.5
 dotenv@^16.4.5
 express@^4.21.0
 express-session@^1.18.0
+groq-sdk@^1.5.0
 jsonwebtoken@^9.0.2
 mongoose@^8.7.0
 passport@^0.7.0
